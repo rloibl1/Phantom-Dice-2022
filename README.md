@@ -1,5 +1,9 @@
 # Phantom-Dice
 
+A strategic game of chance.
+
+# Startup
+
 To launch game run pygame_GUI.py from the Phantom-Dice folder.
 
 ![Phantom Screen 1](https://user-images.githubusercontent.com/113564821/190323231-5f6e3fcb-24bc-4086-943a-d00e8a6f462a.PNG)
