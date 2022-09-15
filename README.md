@@ -1,6 +1,6 @@
 # Phantom-Dice
 
-A strategic game of chance.
+A turn based strategic game of chance.
 
 # Startup
 
