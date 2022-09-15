@@ -1,6 +1,7 @@
 # Phantom Dice Game
 import pygame
 import time
+import sys
 from game_library import *
 from random_action import RandomAgent
 from greedy_action import GreedyAgent
@@ -20,7 +21,7 @@ from pygame.locals import (
 pygame.init()
 new_game = PhantomDice()
 pygame.display.set_caption('Phantom Dice')
-icon = pygame.image.load("./assets/dice_icon.png")
+icon = pygame.image.load("./assets/dice_icon.ico")
 pygame.display.set_icon(icon)
 
 # Load Agents
@@ -313,6 +314,10 @@ def menu():
         elif user_input == 2:
             player_sprite = p_sprite3
             break
+        elif user_input == -1:
+            pygame.display.quit()
+            pygame.quit()
+            sys.exit()
         else:
             # Refresh the loop
             pass
@@ -408,6 +413,10 @@ def menu():
             agent_sprite = a_sprite5
             selected_agent = GreedyAgent(agent=1)
             break
+        elif user_input == -1:
+            pygame.display.quit()
+            pygame.quit()
+            sys.exit()
         else:
             # Refresh the loop
             pass
