@@ -21,7 +21,7 @@ from pygame.locals import (
 pygame.init()
 new_game = PhantomDice()
 pygame.display.set_caption('Phantom Dice')
-icon = pygame.image.load("./assets/dice_icon.ico")
+icon = pygame.image.load("./assets/dice_icon.png")
 pygame.display.set_icon(icon)
 
 # Load Agents
