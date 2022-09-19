@@ -4,7 +4,11 @@ A turn based strategic game of chance.
 
 # Startup
 
-To launch game run pygame_GUI.py from the Phantom-Dice folder.
+Navigate to the code directory
+
+Run "pip install -r requirements.txt"
+
+Then run "python3 pygame_GUI.py"
 
 ![Phantom Screen 1](https://user-images.githubusercontent.com/113564821/190323231-5f6e3fcb-24bc-4086-943a-d00e8a6f462a.PNG)
 
