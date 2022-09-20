@@ -1,4 +1,6 @@
 import numpy as np
+import random
+from game_library import *
 
 # =====================
 # AI Enabling Functions
@@ -102,3 +104,81 @@ def endgame_check(board_state):
                 if board_state[i, j, k] == 0:
                     return False
     return True
+
+
+# Plays out a game out randomly from the current state
+# Returns +1 for a win, 0 for a tie, and -1 for a loss
+def execute_game(agent, board_state):
+    # Init a new game
+    new_game = PhantomDice()
+    new_game.board_state = board_state.copy()
+
+    while True:
+        # Opponent always goes first, as agent is passing in its last move
+        roll = new_game.roll_dice()
+        actions = possible_actions(agent=int(not agent), board_state=new_game.board_state)
+
+        # Choose random action
+        # Create List of the Valid Actions
+        action_list = list()
+        for i, a in np.ndenumerate(actions):
+            if a == 1:
+                action_list.append(i[0])
+
+        # Play the random action
+        new_game.update_board(player=int(not agent), column=random.choice(action_list), roll=roll)
+
+        print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
+
+        # Check if the game is over
+        if new_game.endgame_check():
+            print("***HERE - 1***")
+            # Calculate score for each player
+            new_game.update_score()
+            # Determine who won the game
+            score = new_game.player_score[agent] - new_game.player_score[int(not agent)]
+            if score > 0:
+                # Agent wins
+                return 1, score
+            else:
+                # Opponent wins or tie
+                return 0, score
+
+        # If game is not over then agent plays
+        roll = new_game.roll_dice()
+        actions = possible_actions(agent=agent, board_state=new_game.board_state)
+
+        # Choose random action
+        # Create List of the Valid Actions
+        action_list = list()
+        for i, a in np.ndenumerate(actions):
+            if a == 1:
+                action_list.append(i[0])
+
+        # Play the random action
+        print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
+        new_game.update_board(player=agent, column=random.choice(action_list), roll=roll)
+
+        # Check if the game is over
+        if new_game.endgame_check():
+            print("***HERE - 2***")
+            # Calculate score for each player
+            new_game.update_score()
+            # Determine who won the game
+            score = new_game.player_score[agent] - new_game.player_score[int(not agent)]
+            if score > 0:
+                # Agent wins
+                return 1, score
+            else:
+                # Opponent wins or tie
+                return 0, score
+
+
+# Plays out a series of games between two agents
+def matchup(agent_a, agent_b, matches):
+    # Statistics
+
+    # Run Matches
+    for match in range(matches):
+        # Init a new Game
+        new_game = PhantomDice()

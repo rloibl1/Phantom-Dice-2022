@@ -1,7 +1,7 @@
 from game_library import *
 
 # Initialize a New Game
-new_game = KnuckleBones()
+new_game = PhantomDice()
 
 # Variable to Alternate Turns
 turn = False

@@ -9,6 +9,7 @@ class PhantomDice:
         self.player_score = np.zeros(shape=(2,), dtype=np.int8)
         self.player_names = ['Human', 'BOT']
         self.game_ended = False
+        self.winner = None
 
     # ========================
     # Real-Time Game Functions
@@ -43,9 +44,11 @@ class PhantomDice:
                     self.game_ended = False
                     return False
         self.game_ended = True
-        # Print the Winner of the Game
-        winner = np.argmax(self.player_score)
-        print(f"***{self.player_names[winner]} has won with a score of {self.player_score[winner]}***")
+        # Print the Winner of the Game (-1 for tie)
+        if self.player_score[0] == self.player_score[1]:
+            self.winner = -1
+        else:
+            self.winner = np.argmax(self.player_score)
         return True
 
     # Calculates the Score for Each Player

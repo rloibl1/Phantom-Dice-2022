@@ -5,6 +5,7 @@ import sys
 from game_library import *
 from random_action import RandomAgent
 from greedy_action import GreedyAgent
+from monte_carlo_rollout import MonteCarloAgent
 
 # Import keys from keyboard
 from pygame.locals import (
@@ -23,10 +24,6 @@ new_game = PhantomDice()
 pygame.display.set_caption('Phantom Dice')
 icon = pygame.image.load("./assets/dice_icon.png")
 pygame.display.set_icon(icon)
-
-# Load Agents
-randy_random = RandomAgent(agent=1)
-greedy_bernard = GreedyAgent(agent=1)
 
 # Variable to Alternate Turns
 turn = False
@@ -403,15 +400,15 @@ def menu():
             break
         elif user_input == 2:
             agent_sprite = a_sprite3
-            selected_agent = GreedyAgent(agent=1)
+            selected_agent = MonteCarloAgent(agent=1, trials=10)
             break
         elif user_input == 3:
             agent_sprite = a_sprite4
-            selected_agent = GreedyAgent(agent=1)
+            selected_agent = MonteCarloAgent(agent=1,  trials=50)
             break
         elif user_input == 4:
             agent_sprite = a_sprite5
-            selected_agent = GreedyAgent(agent=1)
+            selected_agent = MonteCarloAgent(agent=1, trials=250)
             break
         elif user_input == -1:
             pygame.display.quit()
@@ -503,7 +500,6 @@ while running:
     # Agent's Turn
     else:
         # Get an action from the agent
-        # action = randy_random.take_action(board_state=new_game.board_state)
         action = selected_agent.take_action(board_state=new_game.board_state, roll=roll)
         new_game.update_board(player=int(turn), column=action, roll=roll)
     # Exit Check (break game loop if ESC was pressed)

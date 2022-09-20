@@ -16,7 +16,7 @@ class RandomAgent:
         action_list = list()
         for i, a in np.ndenumerate(actions):
             if a == 1:
-                action_list.append(i)
+                action_list.append(i[0])
 
         # Delay for a Short Time
         time.sleep(random.uniform(.5, 4.0))
