@@ -128,11 +128,11 @@ def execute_game(agent, board_state):
         # Play the random action
         new_game.update_board(player=int(not agent), column=random.choice(action_list), roll=roll)
 
-        print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
+        # print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
 
         # Check if the game is over
         if new_game.endgame_check():
-            print("***HERE - 1***")
+            # print("***HERE - 1***")
             # Calculate score for each player
             new_game.update_score()
             # Determine who won the game
@@ -156,12 +156,12 @@ def execute_game(agent, board_state):
                 action_list.append(i[0])
 
         # Play the random action
-        print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
+        # print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
         new_game.update_board(player=agent, column=random.choice(action_list), roll=roll)
 
         # Check if the game is over
         if new_game.endgame_check():
-            print("***HERE - 2***")
+            # print("***HERE - 2***")
             # Calculate score for each player
             new_game.update_score()
             # Determine who won the game
@@ -175,10 +175,103 @@ def execute_game(agent, board_state):
 
 
 # Plays out a series of games between two agents
-def matchup(agent_a, agent_b, matches):
-    # Statistics
+# Returns count of agent_a_wins, agent_b_wins, ties
+def benchmark(agent_a, agent_b, matches):
+    # Statistics of Agent A performance against Agent B
+    agent_a_wins = 0
+    agent_b_wins = 0
+    ties = 0
 
     # Run Matches
     for match in range(matches):
         # Init a new Game
         new_game = PhantomDice()
+
+        # =========
+        # Game Loop
+        # =========
+
+        while True:
+
+            # ============
+            # Agent A Turn
+            # ============
+
+            # Dice roll
+            roll = new_game.roll_dice()
+
+            # Actions
+            actions = possible_actions(agent=0, board_state=new_game.board_state)
+
+            # Choose random action
+            # Create List of the Valid Actions
+            action_list = list()
+            for i, a in np.ndenumerate(actions):
+                if a == 1:
+                    action_list.append(i[0])
+
+            # Agent A move
+            action = agent_a.take_action(new_game.board_state, roll)
+            new_game.update_board(player=0, column=action, roll=roll)
+
+            # Endgame Check
+            if new_game.endgame_check():
+                # Calculate final score
+                new_game.update_score()
+                score = new_game.player_score[0] - new_game.player_score[1]
+                # Record result
+                if score > 0:
+                    # Agent A wins
+                    agent_a_wins += 1
+                elif score == 0:
+                    # Tie
+                    ties += 1
+                elif score < 0:
+                    # Agent B wins
+                    agent_b_wins += 1
+
+                # Break the game loop
+                break
+
+            # ============
+            # Agent B Turn
+            # ============
+
+            # Dice roll
+            roll = new_game.roll_dice()
+
+            # Actions
+            actions = possible_actions(agent=1, board_state=new_game.board_state)
+
+            # Choose random action
+            # Create List of the Valid Actions
+            action_list = list()
+            for i, a in np.ndenumerate(actions):
+                if a == 1:
+                    action_list.append(i[0])
+
+            # Agent A move
+            action = agent_b.take_action(new_game.board_state, roll)
+            new_game.update_board(player=1, column=action, roll=roll)
+
+            # Endgame Check
+            if new_game.endgame_check():
+                # Calculate final score
+                new_game.update_score()
+                score = new_game.player_score[0] - new_game.player_score[1]
+                # Record result
+                if score > 0:
+                    # Agent A wins
+                    agent_a_wins += 1
+                elif score == 0:
+                    # Tie
+                    ties += 1
+                elif score < 0:
+                    # Agent B wins
+                    agent_b_wins += 1
+
+                # Break the game loop
+                break
+
+    # Return the statistics
+    return agent_a_wins, agent_b_wins, ties

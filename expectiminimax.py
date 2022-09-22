@@ -4,21 +4,14 @@ from game_library import *
 
 
 def is_max(agent):
-    if agent == 0:
+    if agent == 1:
         return True
     else:
         return False
 
 
 def is_min(agent):
-    if agent == 2:
-        return True
-    else:
-        return False
-
-
-def is_chance(agent):
-    if agent % 2 != 0:
+    if agent == 0:
         return True
     else:
         return False
@@ -28,17 +21,9 @@ def expectiminimax(agent, board_state, depth):
     # Return Condition - Game has ended or the depth cutoff was reached
     if endgame_check(board_state=board_state) or depth == 0:
         return calculate_utility(agent=agent, board_state=board_state)
-    # Max Agent
-    elif is_max(agent=agent):
-        return None
-    # Min Agent
-    elif is_min(agent=agent):
-        return None
-    elif is_chance(agent=agent):
-        return calculate_expected_value(agent=agent)
 
     # Change Turn
-    _agent = int(not(bool(agent)))
+    _agent = int(not agent)
 
     # Get possible actions at this state node
     actions = possible_actions(agent=_agent, board_state=board_state)
@@ -51,9 +36,8 @@ def expectiminimax(agent, board_state, depth):
                                      depth=depth-1)
 
 
-new_game = KnuckleBones()
+new_game = PhantomDice()
 agent = 1
-
-# expectiminimax()
-
-print(is_chance(4))
+test_board = np.zeros(shape=(2, 3, 3), dtype=np.int8)
+result = expectiminimax(agent=1, board_state=test_board, depth=1)
+print(result)

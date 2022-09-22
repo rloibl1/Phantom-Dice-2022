@@ -1,5 +1,6 @@
 # Phantom Dice Game
 import pygame
+import random
 import time
 import sys
 from game_library import *
@@ -502,6 +503,8 @@ while running:
         # Get an action from the agent
         action = selected_agent.take_action(board_state=new_game.board_state, roll=roll)
         new_game.update_board(player=int(turn), column=action, roll=roll)
+        # Brief pause
+        time.sleep(random.uniform(.5, 1.5))
     # Exit Check (break game loop if ESC was pressed)
     if not running:
         break

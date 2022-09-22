@@ -18,9 +18,6 @@ class GreedyAgent:
             if a == 1:
                 action_list.append(i)
 
-        # Delay for a Short Time
-        time.sleep(random.uniform(.5, 3.0))
-
         # Test Each Action and Determine it's Utility
         best_action = -1
         best_value = -1000

@@ -18,8 +18,5 @@ class RandomAgent:
             if a == 1:
                 action_list.append(i[0])
 
-        # Delay for a Short Time
-        time.sleep(random.uniform(.5, 4.0))
-
         # Return a Random Valid Action
         return random.choice(action_list)

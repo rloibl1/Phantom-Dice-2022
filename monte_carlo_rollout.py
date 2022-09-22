@@ -38,5 +38,5 @@ class MonteCarloAgent:
                 best_value = avg_value
                 win_chance = round(wins / self.trials, 4)
         # Return the best action
-        print(f"Best Action: {best_action} with average value of {best_value} win rate {win_chance}")
+        # print(f"Best Action: {best_action} with average value of {best_value} win rate {win_chance}")
         return best_action
