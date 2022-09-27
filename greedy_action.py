@@ -27,5 +27,5 @@ class GreedyAgent:
             if action_utility > best_value:
                 best_value = action_utility
                 best_action = action
-        # Return a Random Valid Action
+        # Return the best action
         return best_action

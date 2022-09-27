@@ -7,6 +7,7 @@ from game_library import *
 from random_action import RandomAgent
 from greedy_action import GreedyAgent
 from monte_carlo_rollout import MonteCarloAgent
+from expectiminimax import MinimaxAgent
 
 # Import keys from keyboard
 from pygame.locals import (
@@ -401,11 +402,11 @@ def menu():
             break
         elif user_input == 2:
             agent_sprite = a_sprite3
-            selected_agent = MonteCarloAgent(agent=1, trials=10)
+            selected_agent = MonteCarloAgent(agent=1, trials=50)
             break
         elif user_input == 3:
             agent_sprite = a_sprite4
-            selected_agent = MonteCarloAgent(agent=1,  trials=50)
+            selected_agent = MinimaxAgent(eval_agent=1, max_depth=3)
             break
         elif user_input == 4:
             agent_sprite = a_sprite5
