@@ -128,11 +128,8 @@ def execute_game(agent, board_state):
         # Play the random action
         new_game.update_board(player=int(not agent), column=random.choice(action_list), roll=roll)
 
-        # print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
-
         # Check if the game is over
         if new_game.endgame_check():
-            # print("***HERE - 1***")
             # Calculate score for each player
             new_game.update_score()
             # Determine who won the game
@@ -156,12 +153,13 @@ def execute_game(agent, board_state):
                 action_list.append(i[0])
 
         # Play the random action
-        # print(actions, action_list, new_game.endgame_check(), '\n', new_game.board_state)
+        # TODO: Crash here when monte-carlo agent is 1 (goes 2nd), and the board state[1] is full
+        # TODO: For some reason the game doesn't end on previous turn and then there are no actions
+        # TODO: Happens rarely
         new_game.update_board(player=agent, column=random.choice(action_list), roll=roll)
 
         # Check if the game is over
         if new_game.endgame_check():
-            # print("***HERE - 2***")
             # Calculate score for each player
             new_game.update_score()
             # Determine who won the game

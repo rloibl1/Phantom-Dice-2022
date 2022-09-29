@@ -39,9 +39,9 @@ class PhantomDice:
         for j in range(self.board_state.shape[1]):
             for k in range(self.board_state.shape[2]):
                 if self.board_state[self.player_turn, j, k] == 0:
-                    # Update Tracker to Reflect Next Players Turn
-                    self.player_turn = int(not bool(self.player_turn))
                     self.game_ended = False
+                    # Update Tracker to Reflect Next Players Turn
+                    self.player_turn = int(not self.player_turn)
                     return False
         self.game_ended = True
         # Print the Winner of the Game (-1 for tie)
