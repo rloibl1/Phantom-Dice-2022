@@ -1,6 +1,6 @@
 # Phantom-Dice
 
-A turn based strategic game of chance.
+A turn based strategic game of chance with various ML agent implementations including: greedy, expecti-minimax, and monto-carlo rollout algorithms.
 
 # Startup
 
